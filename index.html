@@ -75,8 +75,8 @@
                     <i data-lucide="truck" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg text-slate-900 leading-tight">Hubli Planner</h1>
-                    <div class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Logistics Dashboard</div>
+                    <h1 class="font-bold text-lg text-slate-900 leading-tight">LM Dispatch Planner</h1>
+                    <div class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Hubli_Budrashingi_H</div>
                 </div>
             </div>
             
@@ -87,7 +87,7 @@
                 </div>
                 <div class="w-8 h-px bg-slate-200"></div>
                 <div class="step-indicator flex items-center gap-2 text-sm text-slate-400" id="step-nav-2">
-                    <span class="w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold">2</span> Floor Stock
+                    <span class="w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold">2</span> AVTD on Floor
                 </div>
                 <div class="w-8 h-px bg-slate-200"></div>
                 <div class="step-indicator flex items-center gap-2 text-sm text-slate-400" id="step-nav-3">
@@ -123,8 +123,8 @@
                 <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i data-lucide="upload-cloud" class="w-8 h-8"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Upload Planning Data</h2>
-                <p class="text-slate-500 mb-8">Upload the daily ZIP file containing the logistics CSV.</p>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Upload Query Data</h2>
+                <p class="text-slate-500 mb-8">Upload latest ZIP file from scheduled Query.</p>
                 
                 <div class="relative group cursor-pointer">
                     <div class="border-2 border-dashed border-slate-300 rounded-xl p-12 transition-all group-hover:border-blue-500 group-hover:bg-blue-50/50">
@@ -140,10 +140,11 @@
         </div>
 
         <!-- STEP 2: FLOOR CHECK -->
-        <div id="step-2" class="step-content max-w-5xl mx-auto">
+        <div id="step-2" class="st
+            ep-content max-w-5xl mx-auto">
             <div class="flex justify-between items-end mb-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-900">Floor Stock Check</h2>
+                    <h2 class="text-2xl font-bold text-slate-900">AVTD on Floor Check</h2>
                     <p class="text-slate-500">Analysis of shipments currently <strong>Pending</strong> at Hubli.</p>
                 </div>
                 <button onclick="openExclusionModal()" class="text-xs font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-full flex items-center gap-2 transition-colors">
@@ -158,14 +159,14 @@
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                         <i data-lucide="package" class="w-16 h-16 text-blue-600"></i>
                     </div>
-                    <div class="text-sm font-medium text-slate-500 mb-1">Total Packages</div>
+                    <div class="text-sm font-medium text-slate-500 mb-1">Total MWNs</div>
                     <div class="text-3xl font-bold text-slate-900" id="statPendingCount">0</div>
                     <div class="text-xs text-green-600 font-medium mt-2 flex items-center">
-                        <i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Floor Verified
+                        <i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Excludes CCF & Future NTD Cases
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-md transition-all">
-                    <div class="text-sm font-medium text-slate-500 mb-1">Active Routes</div>
+                    <div class="text-sm font-medium text-slate-500 mb-1">Routes Captured</div>
                     <div class="text-3xl font-bold text-slate-900" id="statPendingRoutes">0</div>
                     <div class="w-full bg-slate-100 h-1.5 rounded-full mt-3 overflow-hidden">
                         <div class="bg-indigo-500 h-full w-2/3"></div>
@@ -181,7 +182,7 @@
             <div class="bg-indigo-900 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between text-white shadow-xl shadow-indigo-900/20">
                 <div class="mb-4 md:mb-0">
                     <h3 class="text-xl font-bold mb-1">Ready to add Incoming Vehicles?</h3>
-                    <p class="text-indigo-200 text-sm">Proceed to filter trucks that have arrived for dispatch.</p>
+                    <p class="text-indigo-200 text-sm">Proceed to filter trucks that have arrived/ is expected to arrive for next day's dispatch.</p>
                 </div>
                 <button onclick="goToStep(3)" class="bg-white text-indigo-900 hover:bg-indigo-50 px-6 py-3 rounded-xl font-bold shadow-lg transition-all flex items-center gap-2 transform active:scale-95">
                     Select Vehicles <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -196,8 +197,8 @@
                     <i data-lucide="arrow-left" class="w-5 h-5 text-slate-600"></i>
                 </button>
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-900">Target Arrived Vehicles</h2>
-                    <p class="text-slate-500">Filter the <strong>Arrived</strong> stock (ready for dispatch) to add to your plan.</p>
+                    <h2 class="text-2xl font-bold text-slate-900">Target Arrived/Expected Vehicles</h2>
+                    <p class="text-slate-500">Filter the <strong>Arrived/Expected</strong> MWNs to add to your plan.</p>
                 </div>
             </div>
 
@@ -208,7 +209,7 @@
                         <i data-lucide="clipboard" class="w-4 h-4 text-slate-400"></i> Paste List
                     </label>
                     <textarea id="vehicleInput" class="flex-grow w-full border border-slate-200 rounded-lg p-4 font-mono text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none bg-slate-50 focus:bg-white transition-colors custom-scroll" placeholder="KA51AJ2412&#10;TN88H6041&#10;KA51AJ4610"></textarea>
-                    <p class="text-xs text-slate-400 mt-2 text-right">One vehicle number per line</p>
+                    <p class="text-xs text-slate-400 mt-2 text-right">Tip: Generate ready-t0-copy list from Midmile</p>
                 </div>
 
                 <!-- Smart Select -->
@@ -257,9 +258,9 @@
                     <div>
                         <h2 class="text-2xl font-bold text-slate-900">LM Dispatch Plan</h2>
                         <div class="flex items-center gap-2 text-sm mt-1">
-                            <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-bold">Floor Stock</span>
+                            <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-bold">AVTD on Floor</span>
                             <span class="text-slate-300">+</span>
-                            <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-xs font-bold" id="dashboardVehicleCount">0 Incoming</span>
+                            <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-xs font-bold" id="dashboardVehicleCount">0 Vehicles</span>
                         </div>
                     </div>
                 </div>
@@ -280,7 +281,7 @@
                 <div class="flex justify-between items-end mb-6 border-b-2 border-slate-800 pb-4">
                     <div>
                         <div class="text-2xl font-extrabold text-slate-900 tracking-tight uppercase">Hubli Dispatch Plan</div>
-                        <div class="text-sm text-slate-500 font-medium mt-1">Last Mile Logistics Operations</div>
+                        <div class="text-sm text-slate-500 font-medium mt-1">LM Manager: vinay.a@delhivery.com</div>
                     </div>
                     <div class="text-right">
                         <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Date Generated</div>
@@ -322,8 +323,8 @@
                 </div>
                 
                 <div class="mt-4 flex justify-between items-center text-[10px] text-slate-400 font-mono">
-                    <div>Generated by Hubli LM Planner</div>
-                    <div>Confidential Internal Document</div>
+                    <div>Generated by Hubli LM Dispatch Planner</div>
+                    <div>Confidential Internal Document | Designed by Rh. for ⚡ Team Sonic</div>
                 </div>
             </div>
         </div>
@@ -651,7 +652,7 @@
                     <input type="checkbox" id="chk-${v}" value="${v}" class="vehicle-checkbox w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500">
                     <label for="chk-${v}" class="text-xs font-mono text-slate-700 cursor-pointer select-none w-full flex justify-between items-center">
                         <span class="font-bold">${v}</span>
-                        <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full text-[10px]">${count} pkts</span>
+                        <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full text-[10px]">${count} MWNs</span>
                     </label>
                 `;
                 container.appendChild(div);
