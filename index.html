@@ -63,6 +63,14 @@
             box-shadow: none !important;
             border: 1px solid #e2e8f0;
         }
+        
+        /* High Weight Highlight - Updated V16 */
+        .high-weight-alert {
+            background-color: #fef9c3 !important; /* yellow-100 */
+            color: #000000 !important; /* Bold Black */
+            font-weight: 800 !important;
+            border: 1px solid #eab308 !important; /* yellow-500 subtle border */
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
@@ -99,7 +107,7 @@
                 </div>
             </div>
 
-            <div class="text-xs text-slate-400">v12.1 Fix</div>
+            <div class="text-xs text-slate-400">v16.0 Clean View</div>
         </div>
     </nav>
 
@@ -140,8 +148,7 @@
         </div>
 
         <!-- STEP 2: FLOOR CHECK -->
-        <div id="step-2" class="st
-            ep-content max-w-5xl mx-auto">
+        <div id="step-2" class="step-content max-w-5xl mx-auto">
             <div class="flex justify-between items-end mb-6">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">AVTD on Floor Check</h2>
@@ -154,7 +161,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- Stat Cards (CFT REMOVED) -->
+                <!-- Stat Cards -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-md transition-all">
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                         <i data-lucide="package" class="w-16 h-16 text-blue-600"></i>
@@ -209,7 +216,7 @@
                         <i data-lucide="clipboard" class="w-4 h-4 text-slate-400"></i> Paste List
                     </label>
                     <textarea id="vehicleInput" class="flex-grow w-full border border-slate-200 rounded-lg p-4 font-mono text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none bg-slate-50 focus:bg-white transition-colors custom-scroll" placeholder="KA51AJ2412&#10;TN88H6041&#10;KA51AJ4610"></textarea>
-                    <p class="text-xs text-slate-400 mt-2 text-right">Tip: Generate ready-t0-copy list from Midmile</p>
+                    <p class="text-xs text-slate-400 mt-2 text-right">Tip: Generate ready-to-copy list from Midmile</p>
                 </div>
 
                 <!-- Smart Select -->
@@ -248,8 +255,8 @@
             </div>
         </div>
 
-        <!-- STEP 4: FINAL DASHBOARD (Updated) -->
-        <div id="step-4" class="step-content max-w-[1200px] mx-auto">
+        <!-- STEP 4: FINAL DASHBOARD -->
+        <div id="step-4" class="step-content max-w-[1400px] mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                 <div class="flex items-center gap-4">
                     <button onclick="goToStep(3)" class="p-2 rounded-full hover:bg-slate-200 transition-colors">
@@ -294,21 +301,26 @@
                     <table class="w-full text-sm text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-900 text-white text-xs uppercase font-bold tracking-wider">
-                                <th class="p-4 rounded-tl-lg">Route Cluster</th>
-                                <th class="p-2 text-center bg-blue-700 border-l border-blue-800 w-1/4" colspan="2">B2C <span class="opacity-50 font-normal ml-1">(Std)</span></th>
-                                <th class="p-2 text-center bg-purple-700 border-l border-purple-800 w-1/4" colspan="2">B2B</th>
-                                <th class="p-2 text-center bg-orange-700 border-l border-orange-800 rounded-tr-lg w-1/4" colspan="2">Heavy</th>
+                                <th class="p-4 rounded-tl-lg cursor-pointer hover:bg-slate-800" onclick="sortTable(0)">Route Cluster <i data-lucide="arrow-up-down" class="inline w-3 h-3 ml-1"></i></th>
+                                <th class="p-2 text-center bg-blue-700 border-l border-blue-800 w-1/5" colspan="2">B2C <span class="opacity-50 font-normal ml-1">(Std)</span></th>
+                                <th class="p-2 text-center bg-purple-700 border-l border-purple-800 w-1/5" colspan="2">B2B</th>
+                                <th class="p-2 text-center bg-orange-700 border-l border-orange-800 w-1/5" colspan="2">Heavy</th>
+                                <th class="p-2 text-center bg-slate-700 border-l border-slate-600 rounded-tr-lg w-1/5" colspan="2">TOTAL</th>
                             </tr>
                             <tr class="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase border-b border-slate-300">
                                 <th class="p-2 pl-4">Destination</th>
-                                <th class="py-2 text-center bg-blue-50 text-blue-800">Count</th>
+                                <!-- B2C -->
+                                <th class="py-2 text-center bg-blue-50 text-blue-800">Count <span class="text-[9px] text-blue-400">(MPS)</span></th>
                                 <th class="py-2 text-center bg-blue-50 text-blue-800 border-r border-blue-100">Wt (Kg)</th>
-                                
-                                <th class="py-2 text-center bg-purple-50 text-purple-800">Count</th>
+                                <!-- B2B -->
+                                <th class="py-2 text-center bg-purple-50 text-purple-800">Count <span class="text-[9px] text-purple-400">(MPS)</span></th>
                                 <th class="py-2 text-center bg-purple-50 text-purple-800 border-r border-purple-100">Wt (Kg)</th>
-                                
-                                <th class="py-2 text-center bg-orange-50 text-orange-800">Count</th>
-                                <th class="py-2 text-center bg-orange-50 text-orange-800">Wt (Kg)</th>
+                                <!-- Heavy -->
+                                <th class="py-2 text-center bg-orange-50 text-orange-800">Count <span class="text-[9px] text-orange-400">(MPS)</span></th>
+                                <th class="py-2 text-center bg-orange-50 text-orange-800 border-r border-orange-100">Wt (Kg)</th>
+                                <!-- Total -->
+                                <th class="py-2 text-center bg-slate-200 text-slate-800 cursor-pointer" onclick="sortTable(7)">Count <span class="text-[9px] text-slate-500">(MPS)</span> <i data-lucide="arrow-down" class="inline w-3 h-3 ml-1"></i></th>
+                                <th class="py-2 text-center bg-slate-200 text-slate-800 cursor-pointer" onclick="sortTable(8)">Total Wt <i data-lucide="arrow-down" class="inline w-3 h-3 ml-1"></i></th>
                             </tr>
                         </thead>
                         <tbody id="dashboardBody" class="divide-y divide-slate-200">
@@ -331,31 +343,48 @@
 
     </main>
 
-    <!-- MODALS (Details, Exclusion, Validation, Unassigned) -->
-    <!-- Details Modal -->
+    <!-- MODALS -->
+
+    <!-- Details Modal (Revamped V16) -->
     <div id="detailsModal" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white rounded-xl shadow-2xl p-0 flex flex-col max-h-[80vh] animate-fadeIn">
-            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-xl">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-0 flex flex-col max-h-[85vh] animate-fadeIn overflow-hidden">
+            
+            <!-- Modern Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-700 p-6 flex justify-between items-center text-white">
                 <div>
-                    <h3 class="font-bold text-lg text-slate-800" id="modalTitle">Route Details</h3>
-                    <div class="text-xs text-slate-500 mt-1" id="modalSubtitle">Details</div>
+                    <h3 class="font-bold text-2xl" id="modalTitle">Route Details</h3>
+                    <div class="text-sm text-indigo-100 mt-1 opacity-90" id="modalSubtitle">Details</div>
                 </div>
-                <button onclick="closeModal()" class="p-2 hover:bg-slate-200 rounded-full transition-colors"><i data-lucide="x" class="w-5 h-5 text-slate-500"></i></button>
+                <button onclick="closeModal()" class="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm">
+                    <i data-lucide="x" class="w-5 h-5 text-white"></i>
+                </button>
             </div>
-            <div class="overflow-y-auto custom-scroll p-0 flex-grow">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-50 text-xs uppercase text-slate-500 sticky top-0">
+
+            <!-- Content Area -->
+            <div class="overflow-y-auto custom-scroll p-0 flex-grow bg-slate-50">
+                <table class="w-full text-sm text-left border-collapse">
+                    <thead class="bg-white text-xs uppercase text-slate-500 sticky top-0 shadow-sm z-10">
                         <tr>
-                            <th class="px-6 py-3 border-b">Waybill</th>
-                            <th class="px-6 py-3 border-b text-right">Weight (Kg)</th>
+                            <th class="px-6 py-4 border-b">Waybill Number</th>
+                            <th class="px-6 py-4 border-b">Client / Consignee</th>
+                            <th class="px-6 py-4 border-b">Pincode</th>
+                            <th class="px-6 py-4 border-b text-right">Weight (Kg)</th>
                         </tr>
                     </thead>
-                    <tbody id="modalBody" class="divide-y divide-slate-100"></tbody>
+                    <tbody id="modalBody" class="divide-y divide-slate-100 bg-white">
+                        <!-- Rows injected via JS -->
+                    </tbody>
                 </table>
             </div>
-            <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-xl flex justify-end">
-                <button onclick="closeModal()" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50">Close</button>
+
+            <!-- Footer Summary -->
+            <div class="p-4 border-t border-slate-200 bg-white flex justify-between items-center rounded-b-2xl">
+                <div class="text-xs text-slate-400">Showing all records for this category.</div>
+                <div class="flex items-center gap-4">
+                    <div class="text-sm font-bold text-slate-700">Total Wt: <span id="modalTotalWt" class="text-indigo-600 text-lg">0</span> Kg</div>
+                    <button onclick="closeModal()" class="px-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition-colors">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -368,7 +397,7 @@
                 <i data-lucide="alert-triangle" class="w-6 h-6"></i>
                 <h3 class="font-bold text-lg text-slate-900">Excluded Data Report</h3>
             </div>
-            <p class="text-sm text-slate-600 mb-6">Excluded based on 'Final CCF' status.</p>
+            <p class="text-sm text-slate-600 mb-6">The following items were found in the Hubli data but excluded based on their 'Final CCF' status.</p>
             <div class="space-y-3">
                 <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-100">
                     <span class="font-medium text-slate-700">Future NTD</span>
@@ -383,7 +412,7 @@
         </div>
     </div>
 
-    <!-- VEHICLE VALIDATION MODAL (Fixed) -->
+    <!-- VEHICLE VALIDATION MODAL -->
     <div id="vehicleValidationModal" class="fixed inset-0 z-[65] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-xl shadow-2xl p-0 animate-fadeIn overflow-hidden">
@@ -391,7 +420,7 @@
                 <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="clipboard-check" class="w-5 h-5"></i> Input Confirmation</h3>
             </div>
             <div class="p-6">
-                <!-- RESTORED: id="valTotal" was missing causing JS crash -->
+                <!-- IMPORTANT: Re-added the valTotal ID -->
                 <p class="text-sm text-slate-600 mb-4">You pasted <strong id="valTotal" class="text-slate-900">0</strong> vehicle numbers. Breakdown:</p>
                 <div class="space-y-3 mb-6">
                     <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
@@ -407,7 +436,7 @@
                     </div>
                 </div>
                 <div class="flex gap-3">
-                    <button onclick="closeValidationModal()" class="flex-1 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50">Back</button>
+                    <button onclick="closeValidationModal()" class="flex-1 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50">Back to Edit</button>
                     <button onclick="confirmVehicleSelection()" class="flex-1 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700">Proceed</button>
                 </div>
             </div>
@@ -474,6 +503,7 @@
         let GLOBAL_VEHICLE_MAP = {}; 
         let STATS_EXCLUSIONS = { future: 0, ccf: 0 };
         let CURRENT_STEP = 1;
+        let CURRENT_SORT = { key: 'totalCnt', order: 'desc' }; // Default sort
         
         // --- Init ---
         lucide.createIcons();
@@ -510,7 +540,7 @@
             setTimeout(() => { toast.classList.add('translate-x-full', 'opacity-0'); }, 4000);
         }
 
-        // --- Logic: Data Processing (CFT REMOVED) ---
+        // --- Logic: Data Processing ---
         async function handleZipUpload(event) {
              const file = event.target.files[0];
             if (!file) return;
@@ -665,6 +695,12 @@
              initVehicleOptions(GLOBAL_TRANSIT_DATA);
         }
 
+        // --- SAFE UPDATE FUNCTIONS ---
+        function safeSetText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        }
+
         function prepareFinalData() {
              const text = document.getElementById('vehicleInput').value;
             const manualVehicles = text.split('\n').map(v => v.trim().toUpperCase()).filter(v => v !== '');
@@ -675,24 +711,35 @@
                     if (GLOBAL_VEHICLE_MAP.hasOwnProperty(v)) validList.push(v);
                     else invalidList.push(v);
                 });
-                document.getElementById('valTotal').textContent = manualVehicles.length;
-                document.getElementById('valValid').textContent = validList.length;
-                document.getElementById('valInvalid').textContent = invalidList.length;
+                
+                safeSetText('valTotal', manualVehicles.length);
+                safeSetText('valValid', validList.length);
+                safeSetText('valInvalid', invalidList.length);
+                
                 const listEl = document.getElementById('valInvalidList');
-                if (invalidList.length > 0) {
-                    listEl.textContent = invalidList.join(', ');
-                    listEl.classList.remove('hidden');
-                } else {
-                    listEl.classList.add('hidden');
+                if (listEl) {
+                    if (invalidList.length > 0) {
+                        listEl.textContent = invalidList.join(', ');
+                        listEl.classList.remove('hidden');
+                    } else {
+                        listEl.classList.add('hidden');
+                    }
                 }
-                document.getElementById('vehicleValidationModal').classList.remove('hidden');
+                
+                const modal = document.getElementById('vehicleValidationModal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                } else {
+                    confirmVehicleSelection();
+                }
             } else {
                 confirmVehicleSelection();
             }
         }
         
         function closeValidationModal() {
-            document.getElementById('vehicleValidationModal').classList.add('hidden');
+            const modal = document.getElementById('vehicleValidationModal');
+            if(modal) modal.classList.add('hidden');
         }
 
         function confirmVehicleSelection() {
@@ -706,7 +753,8 @@
                 return targetedVehicles.has((row['vehicle_number'] || '').trim().toUpperCase());
             });
             GLOBAL_DISPLAY_DATA = [...GLOBAL_PENDING_DATA, ...selectedTransitData];
-            document.getElementById('dashboardVehicleCount').textContent = `${targetedVehicles.size} Incoming`;
+            
+            safeSetText('dashboardVehicleCount', `${targetedVehicles.size} Incoming`);
 
             const unassignedCount = GLOBAL_DISPLAY_DATA.filter(row => {
                 const route = (row['flare_info_output_cluster'] || '').trim();
@@ -714,40 +762,56 @@
             }).length;
 
             if (unassignedCount > 0) {
-                document.getElementById('unassignedCountDisplay').textContent = unassignedCount;
-                document.getElementById('unassignedPromptModal').classList.remove('hidden');
+                safeSetText('unassignedCountDisplay', unassignedCount);
+                
+                const modal = document.getElementById('unassignedPromptModal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                } else {
+                    renderDashboard(GLOBAL_DISPLAY_DATA);
+                    goToStep(4);
+                }
             } else {
                 renderDashboard(GLOBAL_DISPLAY_DATA);
                 goToStep(4);
             }
         }
         function proceedToDashboard() {
-            document.getElementById('unassignedPromptModal').classList.add('hidden');
+            const modal = document.getElementById('unassignedPromptModal');
+            if(modal) modal.classList.add('hidden');
             renderDashboard(GLOBAL_DISPLAY_DATA);
             goToStep(4);
         }
          function openUnassignedManager() {
-            document.getElementById('unassignedPromptModal').classList.add('hidden');
+            const modal = document.getElementById('unassignedPromptModal');
+            if(modal) modal.classList.add('hidden');
+            
             const routes = new Set();
             GLOBAL_DISPLAY_DATA.forEach(r => {
                 const route = (r['flare_info_output_cluster'] || '').trim();
                 if(route) routes.add(route);
             });
             const select = document.getElementById('routeSelect');
-            select.innerHTML = `<option value="">Select Target Route...</option>`;
-            Array.from(routes).sort().forEach(r => {
-                const opt = document.createElement('option');
-                opt.value = r;
-                opt.textContent = r;
-                select.appendChild(opt);
-            });
-            select.innerHTML += `<option value="__NEW__" class="font-bold text-indigo-600">+ Create New Route...</option>`;
+            if(select) {
+                select.innerHTML = `<option value="">Select Target Route...</option>`;
+                Array.from(routes).sort().forEach(r => {
+                    const opt = document.createElement('option');
+                    opt.value = r;
+                    opt.textContent = r;
+                    select.appendChild(opt);
+                });
+                select.innerHTML += `<option value="__NEW__" class="font-bold text-indigo-600">+ Create New Route...</option>`;
+            }
+
             renderUnassignedTable();
-            document.getElementById('assignmentManagerModal').classList.remove('hidden');
+            const mgrModal = document.getElementById('assignmentManagerModal');
+            if(mgrModal) mgrModal.classList.remove('hidden');
         }
         function renderUnassignedTable() {
             const tbody = document.getElementById('unassignedTableBody');
+            if(!tbody) return;
             tbody.innerHTML = '';
+            
             const unassignedItems = GLOBAL_DISPLAY_DATA.filter(row => {
                 return !(row['flare_info_output_cluster'] || '').trim();
             });
@@ -775,12 +839,14 @@
         }
         function updateSelectedCount() {
             const count = document.querySelectorAll('.unassigned-checkbox:checked').length;
-            document.getElementById('selectedCountDisplay').textContent = count;
+            safeSetText('selectedCountDisplay', count);
         }
         function checkNewRouteOption() {
             const val = document.getElementById('routeSelect').value;
             const input = document.getElementById('newRouteInput');
-            if(val === '__NEW__') { input.classList.remove('hidden'); input.focus(); } else { input.classList.add('hidden'); }
+            if(input) {
+                if(val === '__NEW__') { input.classList.remove('hidden'); input.focus(); } else { input.classList.add('hidden'); }
+            }
         }
         function applyManualAssignment() {
              const selectVal = document.getElementById('routeSelect').value;
@@ -799,11 +865,15 @@
             });
             renderUnassignedTable();
             document.getElementById('routeSelect').value = "";
-            document.getElementById('newRouteInput').value = "";
-            document.getElementById('newRouteInput').classList.add('hidden');
+            const input = document.getElementById('newRouteInput');
+            if(input) {
+                input.value = "";
+                input.classList.add('hidden');
+            }
         }
         function closeAssignmentManager() {
-            document.getElementById('assignmentManagerModal').classList.add('hidden');
+            const modal = document.getElementById('assignmentManagerModal');
+            if(modal) modal.classList.add('hidden');
             renderDashboard(GLOBAL_DISPLAY_DATA);
             goToStep(4);
         }
@@ -812,11 +882,12 @@
         function renderDashboard(data) {
             const tbody = document.getElementById('dashboardBody');
             const tfoot = document.getElementById('dashboardFooter');
-            const dateEl = document.getElementById('reportDate');
             
-            // Set Date
+            const dateEl = document.getElementById('reportDate');
             const now = new Date();
-            dateEl.textContent = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            if(dateEl) dateEl.textContent = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            if(!tbody || !tfoot) return;
 
             tbody.innerHTML = '';
             tfoot.innerHTML = '';
@@ -836,48 +907,95 @@
 
                 if (!GLOBAL_SUMMARY_MAP[route]) {
                     GLOBAL_SUMMARY_MAP[route] = {
-                        B2C: { cnt: 0, wt: 0, items: [] },
-                        B2B: { cnt: 0, wt: 0, items: [] },
-                        Heavy: { cnt: 0, wt: 0, items: [] }
+                        B2C: { cnt: 0, wt: 0, mps: 0, items: [] },
+                        B2B: { cnt: 0, wt: 0, mps: 0, items: [] },
+                        Heavy: { cnt: 0, wt: 0, mps: 0, items: [] },
+                        totalCnt: 0,
+                        totalWt: 0,
+                        totalMps: 0
                     };
                 }
 
                 const wt = parseFloat(row['int_wt_iwt']) || 0;
-                const mwb = row['Master_waybill'];
+                // CLEAN WAYBILL HERE (Remove leading quote if present)
+                let mwb = (row['Master_waybill'] || '').toString();
+                if (mwb.startsWith("'")) mwb = mwb.substring(1);
+
                 const mcount = parseInt(row['mcount cl'] || row['mcount']) || 0; 
                 
                 const itemData = {
                     id: mcount > 0 ? `${mwb} (Lot: ${mcount})` : mwb,
-                    wt: wt
+                    wt: wt,
+                    client: row['cl'] || '-',
+                    pin: row['pin'] || '-'
                 };
 
                 GLOBAL_SUMMARY_MAP[route][cat].cnt += 1;
                 GLOBAL_SUMMARY_MAP[route][cat].wt += wt;
+                GLOBAL_SUMMARY_MAP[route][cat].mps += mcount;
                 GLOBAL_SUMMARY_MAP[route][cat].items.push(itemData);
+
+                // Add to Route Totals
+                GLOBAL_SUMMARY_MAP[route].totalCnt += 1;
+                GLOBAL_SUMMARY_MAP[route].totalWt += wt;
+                GLOBAL_SUMMARY_MAP[route].totalMps += mcount;
             });
 
-            const grand = { B2C: {c:0,w:0}, B2B: {c:0,w:0}, Heavy: {c:0,w:0} };
+            const grand = { B2C: {c:0,w:0}, B2B: {c:0,w:0}, Heavy: {c:0,w:0}, Tot: {c:0, w:0} };
 
-            Object.keys(GLOBAL_SUMMARY_MAP).sort().forEach(route => {
+            // Sort logic (Total Count Descending)
+            const sortedRoutes = Object.keys(GLOBAL_SUMMARY_MAP).sort((a, b) => {
+                const valA = GLOBAL_SUMMARY_MAP[a][CURRENT_SORT.key];
+                const valB = GLOBAL_SUMMARY_MAP[b][CURRENT_SORT.key];
+                if (CURRENT_SORT.order === 'desc') return valB - valA;
+                return valA - valB;
+            });
+
+            sortedRoutes.forEach(route => {
                 const s = GLOBAL_SUMMARY_MAP[route];
                 grand.B2C.c += s.B2C.cnt; grand.B2C.w += s.B2C.wt;
                 grand.B2B.c += s.B2B.cnt; grand.B2B.w += s.B2B.wt;
                 grand.Heavy.c += s.Heavy.cnt; grand.Heavy.w += s.Heavy.wt;
+                grand.Tot.c += s.totalCnt; grand.Tot.w += s.totalWt;
 
                 const safeRoute = route.replace(/'/g, "\\'");
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50 border-b border-slate-100 transition-colors bg-white";
+                
+                const getCellStyle = (wt) => wt > 750 ? "high-weight-alert" : "";
+                const getMpsText = (mps) => mps > 0 ? `<span class="opacity-75 text-[10px] ml-1">(${mps})</span>` : '';
+
                 tr.innerHTML = `
                     <td class="p-3 pl-4 font-bold text-slate-800 text-xs border-r border-slate-200 sticky left-0 bg-white">${route}</td>
                     
-                    <td class="py-2 text-center text-blue-700 font-bold text-xs interactive-cell" onclick="openDetails('${safeRoute}', 'B2C')">${fmt(s.B2C.cnt, 0)}</td>
-                    <td class="py-2 text-center text-slate-500 text-xs border-r border-slate-200 interactive-cell" onclick="openDetails('${safeRoute}', 'B2C')">${fmt(s.B2C.wt)}</td>
+                    <td class="py-2 text-center text-blue-700 font-bold text-xs interactive-cell ${getCellStyle(s.B2C.wt)}" onclick="openDetails('${safeRoute}', 'B2C')">
+                        ${fmt(s.B2C.cnt, 0)}${getMpsText(s.B2C.mps)}
+                    </td>
+                    <td class="py-2 text-center text-slate-500 text-xs border-r border-slate-200 interactive-cell ${getCellStyle(s.B2C.wt)}" onclick="openDetails('${safeRoute}', 'B2C')">
+                        ${fmt(s.B2C.wt)}
+                    </td>
 
-                    <td class="py-2 text-center text-purple-700 font-bold text-xs interactive-cell" onclick="openDetails('${safeRoute}', 'B2B')">${fmt(s.B2B.cnt, 0)}</td>
-                    <td class="py-2 text-center text-slate-500 text-xs border-r border-slate-200 interactive-cell" onclick="openDetails('${safeRoute}', 'B2B')">${fmt(s.B2B.wt)}</td>
+                    <td class="py-2 text-center text-purple-700 font-bold text-xs interactive-cell ${getCellStyle(s.B2B.wt)}" onclick="openDetails('${safeRoute}', 'B2B')">
+                        ${fmt(s.B2B.cnt, 0)}${getMpsText(s.B2B.mps)}
+                    </td>
+                    <td class="py-2 text-center text-slate-500 text-xs border-r border-slate-200 interactive-cell ${getCellStyle(s.B2B.wt)}" onclick="openDetails('${safeRoute}', 'B2B')">
+                        ${fmt(s.B2B.wt)}
+                    </td>
 
-                    <td class="py-2 text-center text-orange-700 font-bold text-xs interactive-cell" onclick="openDetails('${safeRoute}', 'Heavy')">${fmt(s.Heavy.cnt, 0)}</td>
-                    <td class="py-2 text-center text-slate-500 text-xs interactive-cell" onclick="openDetails('${safeRoute}', 'Heavy')">${fmt(s.Heavy.wt)}</td>
+                    <td class="py-2 text-center text-orange-700 font-bold text-xs interactive-cell ${getCellStyle(s.Heavy.wt)}" onclick="openDetails('${safeRoute}', 'Heavy')">
+                        ${fmt(s.Heavy.cnt, 0)}${getMpsText(s.Heavy.mps)}
+                    </td>
+                    <td class="py-2 text-center text-slate-500 text-xs border-r border-slate-200 interactive-cell ${getCellStyle(s.Heavy.wt)}" onclick="openDetails('${safeRoute}', 'Heavy')">
+                        ${fmt(s.Heavy.wt)}
+                    </td>
+
+                    <!-- Total -->
+                    <td class="py-2 text-center text-slate-700 font-bold text-xs bg-slate-50 border-r border-slate-200">
+                        ${fmt(s.totalCnt, 0)}${getMpsText(s.totalMps)}
+                    </td>
+                    <td class="py-2 text-center text-slate-700 font-bold text-xs bg-slate-50">
+                        ${fmt(s.totalWt)}
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -890,9 +1008,26 @@
                     <td class="py-2 text-center bg-slate-800 text-purple-200">${fmt(grand.B2B.c,0)}</td>
                     <td class="py-2 text-center bg-slate-800 border-r border-slate-700 text-purple-200">${fmt(grand.B2B.w)}</td>
                     <td class="py-2 text-center bg-slate-800 text-orange-200">${fmt(grand.Heavy.c,0)}</td>
-                    <td class="py-2 text-center bg-slate-800 text-orange-200">${fmt(grand.Heavy.w)}</td>
+                    <td class="py-2 text-center bg-slate-800 border-r border-slate-700 text-orange-200">${fmt(grand.Heavy.w)}</td>
+                    <td class="py-2 text-center bg-slate-700 text-white font-bold">${fmt(grand.Tot.c,0)}</td>
+                    <td class="py-2 text-center bg-slate-700 text-white font-bold">${fmt(grand.Tot.w)}</td>
                 </tr>
             `;
+        }
+
+        function sortTable(columnIndex) {
+            if (columnIndex === 0) {
+                CURRENT_SORT = { key: 'name', order: CURRENT_SORT.key === 'name' && CURRENT_SORT.order === 'asc' ? 'desc' : 'asc' };
+            } else if (columnIndex === 7) {
+                CURRENT_SORT = { key: 'totalCnt', order: CURRENT_SORT.key === 'totalCnt' && CURRENT_SORT.order === 'desc' ? 'asc' : 'desc' };
+            } else if (columnIndex === 8) {
+                CURRENT_SORT = { key: 'totalWt', order: CURRENT_SORT.key === 'totalWt' && CURRENT_SORT.order === 'desc' ? 'asc' : 'desc' };
+            }
+            // Patch for name sorting (re-triggers renderDashboard)
+            if (CURRENT_SORT.key === 'name') {
+               // Logic handled inside renderDashboard for re-sort using global key
+            }
+            renderDashboard(GLOBAL_DISPLAY_DATA);
         }
 
         // --- Details ---
@@ -900,48 +1035,81 @@
             const data = GLOBAL_SUMMARY_MAP[route]?.[category];
             if(!data || data.cnt === 0) return;
 
-            document.getElementById('modalTitle').textContent = route;
-            document.getElementById('modalSubtitle').innerHTML = `<span class="font-bold">${category}</span> Category - ${data.cnt} packages`;
+            safeSetText('modalTitle', route);
+            
+            const sub = document.getElementById('modalSubtitle');
+            if(sub) sub.innerHTML = `<span class="font-bold text-white/80">${category}</span> • ${data.cnt} pkts`;
+            
+            // Set Summary Wt in Footer
+            const footWt = document.getElementById('modalTotalWt');
+            if(footWt) footWt.textContent = data.wt.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1});
 
             const tbody = document.getElementById('modalBody');
-            tbody.innerHTML = '';
-
-            data.items.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="px-6 py-3 font-mono text-slate-600">${item.id}</td>
-                    <td class="px-6 py-3 text-right text-slate-500">${item.wt.toFixed(2)}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-            document.getElementById('detailsModal').classList.remove('hidden');
+            if(tbody) {
+                tbody.innerHTML = '';
+                data.items.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 font-mono text-slate-600 text-xs">${item.id}</td>
+                        <td class="px-6 py-4 text-slate-800 font-medium text-xs">${item.client}</td>
+                        <td class="px-6 py-4 text-slate-500 font-mono text-xs">${item.pin}</td>
+                        <td class="px-6 py-4 text-right text-slate-700 font-bold text-xs">${item.wt.toFixed(1)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+            const modal = document.getElementById('detailsModal');
+            if(modal) modal.classList.remove('hidden');
         }
 
-        function closeModal() { document.getElementById('detailsModal').classList.add('hidden'); }
-        function openExclusionModal() { document.getElementById('exclusionModal').classList.remove('hidden'); }
-        function closeExclusionModal() { document.getElementById('exclusionModal').classList.add('hidden'); }
+        function closeModal() { 
+            const modal = document.getElementById('detailsModal');
+            if(modal) modal.classList.add('hidden'); 
+        }
+        function openExclusionModal() { 
+            const modal = document.getElementById('exclusionModal');
+            if(modal) modal.classList.remove('hidden');
+        }
+        function closeExclusionModal() { 
+            const modal = document.getElementById('exclusionModal');
+            if(modal) modal.classList.add('hidden');
+        }
         function fmt(n, decimals=1) { if(!n) return '-'; return n.toLocaleString(undefined, {minimumFractionDigits: decimals, maximumFractionDigits: decimals}); }
 
         // --- Export ---
         function downloadReport() {
             if(GLOBAL_DISPLAY_DATA.length === 0) return;
             const summaryArr = [];
-            Object.keys(GLOBAL_SUMMARY_MAP).sort().forEach(route => {
+            const sortedRoutes = Object.keys(GLOBAL_SUMMARY_MAP).sort((a, b) => GLOBAL_SUMMARY_MAP[b].totalCnt - GLOBAL_SUMMARY_MAP[a].totalCnt);
+
+            sortedRoutes.forEach(route => {
                 const s = GLOBAL_SUMMARY_MAP[route];
                 summaryArr.push({
                     "Route": route,
-                    "B2C Cnt": s.B2C.cnt, "B2C Wt": s.B2C.wt,
-                    "B2B Cnt": s.B2B.cnt, "B2B Wt": s.B2B.wt,
-                    "Heavy Cnt": s.Heavy.cnt, "Heavy Wt": s.Heavy.wt,
+                    "B2C Cnt": s.B2C.cnt, "B2C MPS": s.B2C.mps, "B2C Wt": s.B2C.wt,
+                    "B2B Cnt": s.B2B.cnt, "B2B MPS": s.B2B.mps, "B2B Wt": s.B2B.wt,
+                    "Heavy Cnt": s.Heavy.cnt, "Heavy MPS": s.Heavy.mps, "Heavy Wt": s.Heavy.wt,
+                    "Total Cnt": s.totalCnt, "Total MPS": s.totalMps, "Total Wt": s.totalWt
                 });
             });
-            const detailsArr = GLOBAL_DISPLAY_DATA.map(row => ({
-                "Route": row['flare_info_output_cluster'] || 'Unassigned',
-                "MWB": row['Master_waybill'],
-                "Lot Count": row['mcount cl'] || row['mcount'] || 0,
-                "Type": row['pdt'] || 'B2C',
-                "Weight": parseFloat(row['int_wt_iwt'])
-            }));
+            
+            const detailsArr = GLOBAL_DISPLAY_DATA.map(row => {
+                // CLEAN WAYBILL FOR EXPORT TOO
+                let mwb = (row['Master_waybill'] || '').toString();
+                if (mwb.startsWith("'")) mwb = mwb.substring(1);
+
+                return {
+                    "Route": row['flare_info_output_cluster'] || 'Unassigned',
+                    "MWB": mwb,
+                    "Client": row['cl'] || '',
+                    "Pincode": row['pin'] || '',
+                    "Lot Count": row['mcount cl'] || row['mcount'] || 0,
+                    "Type": row['pdt'] || 'B2C',
+                    "Weight": parseFloat(row['int_wt_iwt'])
+                };
+            });
+            
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(summaryArr), "Summary");
             XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(detailsArr), "Detailed Plan");
@@ -952,11 +1120,10 @@
             const captureElement = document.querySelector('#capture-target');
             if (!captureElement) return;
 
-            // Optional: Adjust styles for capture
             captureElement.classList.add('capture-mode');
 
             html2canvas(captureElement, {
-                scale: 2, // Higher resolution
+                scale: 2, 
                 useCORS: true,
                 backgroundColor: '#ffffff'
             }).then(canvas => {
